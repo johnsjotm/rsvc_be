@@ -1,0 +1,20 @@
+version: '3'
+services:
+  backend:
+    image: rsvc-backend-dev
+    container_name: rsvc-backend-dev
+    build:
+      context: ./
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/app/
+      - /app/node_modules
+    depends_on:
+      - mysql
+    env_file:
+      - .env
+    restart: always
+    network_mode: host
+    ports:
+      - "5000:5000"  # Map host port 8080 to container port 3000
+
